@@ -1,3 +1,5 @@
+#Write a python program to print the contents of a directory using OS module.
+
 import os
 
 # Select the directory whose content you want to list 
