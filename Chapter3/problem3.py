@@ -1,4 +1,4 @@
-
+# Write a program to find the double space in a string
 #1st method
 # text = "  "
 # print(text.isspace()) #The isspace() method returns True if all the characters in a string are whitespaces, otherwise False.
