@@ -1,5 +1,9 @@
 # write a program to print star pattern
-
+'''
+  *
+ ***
+*****
+'''
 n = int(input("Enter a number : "))
 
 for i in range(1, n+1):
