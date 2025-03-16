@@ -183,7 +183,117 @@ print(obj.show())  # Output: Parent Class Method (Modified by Child)
 
 ---
 
-## Conclusion
+# The `@property` Decorator in Python
+
+## Introduction
+The `@property` decorator in Python is used to define **getter, setter, and deleter methods** for managing attribute access in an object-oriented way. It allows controlled access to private attributes while maintaining a clean and readable syntax.
+
+## Basic Usage of `@property`
+A **property** allows a method to be accessed like an attribute. This is useful when you want to enforce some logic while retrieving a value.
+
+```python
+class Person:
+    def __init__(self, name):
+        self._name = name  # Private attribute convention (_name)
+    
+    @property
+    def name(self):
+        """Getter method for name."""
+        return self._name
+
+person = Person("Alice")
+print(person.name)  # Output: Alice
+```
+
+## Using `@property` with a Setter
+A **setter** allows modification of a private attribute while enforcing constraints.
+
+```python
+class Person:
+    def __init__(self, name):
+        self._name = name
+    
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        if not isinstance(value, str):
+            raise ValueError("Name must be a string!")
+        self._name = value
+
+person = Person("Alice")
+person.name = "Bob"  # Allowed
+print(person.name)  # Output: Bob
+```
+
+Trying to set a non-string value will raise an error:
+
+```python
+person.name = 123  # Raises ValueError: Name must be a string!
+```
+
+## Using `@property` with a Deleter
+A **deleter** method allows controlled deletion of an attribute.
+
+```python
+class Person:
+    def __init__(self, name):
+        self._name = name
+    
+    @property
+    def name(self):
+        return self._name
+    
+    @name.deleter
+    def name(self):
+        print("Deleting name...")
+        del self._name
+
+person = Person("Alice")
+del person.name  # Output: Deleting name...
+```
+
+## Full Example with Getter, Setter, and Deleter
+```python
+class Employee:
+    def __init__(self, salary):
+        self._salary = salary
+    
+    @property
+    def salary(self):
+        """Getter for salary."""
+        return self._salary
+    
+    @salary.setter
+    def salary(self, value):
+        if value < 0:
+            raise ValueError("Salary cannot be negative!")
+        self._salary = value
+    
+    @salary.deleter
+    def salary(self):
+        print("Deleting salary...")
+        del self._salary
+
+emp = Employee(5000)
+print(emp.salary)  # Output: 5000
+emp.salary = 6000  # Update salary
+print(emp.salary)  # Output: 6000
+del emp.salary     # Deletes salary
+```
+
+## Advantages of `@property`
+- **Encapsulation**: Restricts direct access to private attributes.
+- **Readability**: Allows accessing methods like attributes (`obj.attribute` instead of `obj.attribute()`).
+- **Validation**: Allows logic enforcement (e.g., preventing negative values in setters).
+
+## Conclusion 1
+The `@property` decorator in Python is a powerful tool for managing attribute access while maintaining clean, readable code. By using getter, setter, and deleter methods, we can add logic to attribute access while keeping it intuitive.
+
+
+## Conclusion 2
 Inheritance is a powerful feature in Python that helps in creating reusable and modular code. Understanding its different types and techniques like method overriding and MRO allows for more efficient and scalable applications.
 
 
